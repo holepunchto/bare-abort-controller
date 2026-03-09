@@ -5,10 +5,15 @@ interface AbortSignal extends EventTarget {
   readonly reason: any
 
   throwIfAborted(): void
+
+  toJSON(): { aborted: boolean; reason: any }
 }
 
 declare class AbortSignal {
   private constructor()
+
+  static abort(reason: any): AbortSignal
+  static timeout(ms: number): AbortSignal
 }
 
 interface AbortController {
@@ -19,9 +24,6 @@ interface AbortController {
 
 declare class AbortController {
   constructor()
-
-  static abort(reason: any): AbortSignal
-  static timeout(ms: number): AbortSignal
 }
 
 declare namespace AbortController {
