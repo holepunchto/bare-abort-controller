@@ -14,6 +14,7 @@ declare class AbortSignal {
 
   static abort(reason: any): AbortSignal
   static timeout(ms: number): AbortSignal
+  static any(signals: AbortSignal[]): AbortSignal
 }
 
 interface AbortController {

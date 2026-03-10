@@ -20,6 +20,9 @@ class AbortSignal extends EventTarget {
     super()
 
     this._reason = undefined
+    this._dependent = false
+    this._sources = []
+    this._dependents = []
   }
 
   // https://dom.spec.whatwg.org/#dom-abortsignal-aborted
@@ -39,6 +42,10 @@ class AbortSignal extends EventTarget {
     this._reason = reason
 
     this.dispatchEvent(new Event('abort'))
+
+    for (const signal of this._dependents) {
+      signal._abort(reason)
+    }
   }
 
   // https://dom.spec.whatwg.org/#dom-abortsignal-throwifaborted
@@ -83,6 +90,34 @@ class AbortSignal extends EventTarget {
     timer.unref()
 
     return signal
+  }
+
+  // https://dom.spec.whatwg.org/#dom-abortsignal-any
+  static any(signals) {
+    const result = new AbortSignal()
+
+    for (const signal of signals) {
+      if (signal.aborted) {
+        result._reason = signal.reason
+        return result
+      }
+    }
+
+    result._dependent = true
+
+    for (const signal of signals) {
+      if (signal._dependent === false) {
+        result._sources.push(signal)
+        signal._dependents.push(result)
+      } else {
+        for (const source of signal._sources) {
+          result._sources.push(source)
+          source._dependents.push(result)
+        }
+      }
+    }
+
+    return result
   }
 }
 
