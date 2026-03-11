@@ -48,3 +48,52 @@ test('AbortSignal, timeout', (t) => {
     t.is(signal.reason.message, 'The operation timed out')
   })
 })
+
+test('AbortSignal, from aborted', (t) => {
+  t.plan(2)
+
+  const signal = AbortSignal.any([AbortSignal.abort(new Error('boom!'))])
+
+  signal.addEventListener('abort', (event) => {
+    t.fail()
+  })
+
+  t.is(signal.aborted, true)
+  t.is(signal.reason.message, 'boom!')
+})
+
+test('AbortSignal, any, from controller', (t) => {
+  t.plan(4)
+
+  const controller = new AbortController()
+
+  const signal = AbortSignal.any([controller.signal])
+
+  signal.addEventListener('abort', (event) => {
+    t.is(signal.reason.message, 'boom!')
+  })
+
+  t.is(signal.aborted, false)
+
+  controller.abort(new Error('boom!'))
+
+  t.is(signal.aborted, true)
+  t.is(signal.reason.message, 'boom!')
+})
+
+test('AbortSignal, any, recursive', (t) => {
+  t.plan(3)
+
+  const first = new AbortController()
+  const second = AbortSignal.any([first.signal])
+  const third = AbortSignal.any([second])
+
+  third.addEventListener('abort', (event) => {
+    t.is(third.reason.message, 'boom!')
+  })
+
+  first.abort(new Error('boom!'))
+
+  t.is(third.aborted, true)
+  t.is(third.reason.message, 'boom!')
+})
