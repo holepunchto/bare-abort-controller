@@ -1,6 +1,6 @@
 {
   "name": "bare-abort-controller",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Abort controller support for Bare",
   "exports": {
     "./package": "./package.json",
