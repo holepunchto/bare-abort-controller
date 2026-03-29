@@ -20,10 +20,11 @@
     "global.d.ts"
   ],
   "scripts": {
-    "test": "npm run lint && npm run test:bare && npm run test:node",
-    "test:bare": "bare test.js",
-    "test:node": "node test.js",
-    "lint": "prettier . --check"
+    "format": "prettier --write . && lunte --fix",
+    "lint": "prettier --check . && lunte",
+    "test": "npm run test:bare && npm run test:node",
+    "test:bare": "brittle-bare --coverage test.js",
+    "test:node": "brittle-node --coverage test.js"
   },
   "repository": {
     "type": "git",
@@ -40,6 +41,7 @@
   },
   "devDependencies": {
     "brittle": "^3.3.2",
+    "lunte": "^1.6.0",
     "prettier": "^3.4.2",
     "prettier-config-holepunch": "^1.0.0"
   }
