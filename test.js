@@ -25,7 +25,7 @@ test('basic', (t) => {
 })
 
 test('AbortSignal, abort', (t) => {
-  t.plan(1)
+  t.plan(2)
 
   const signal = AbortSignal.abort(new Error('boom!'))
 
@@ -33,7 +33,21 @@ test('AbortSignal, abort', (t) => {
     t.fail()
   })
 
+  t.is(signal.aborted, true)
   t.is(signal.reason.message, 'boom!')
+})
+
+test('AbortSignal, abort, default reason', (t) => {
+  t.plan(2)
+
+  const signal = AbortSignal.abort()
+
+  signal.addEventListener('abort', (event) => {
+    t.fail()
+  })
+
+  t.is(signal.aborted, true)
+  t.is(signal.reason.message, 'The operation was aborted')
 })
 
 test('AbortSignal, timeout', (t) => {
