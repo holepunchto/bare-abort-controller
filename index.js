@@ -70,7 +70,7 @@ class AbortSignal extends EventTarget {
   }
 
   // https://dom.spec.whatwg.org/#dom-abortsignal-abort
-  static abort(reason) {
+  static abort(reason = new AbortError('The operation was aborted')) {
     const signal = new AbortSignal()
 
     signal._reason = reason
