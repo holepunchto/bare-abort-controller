@@ -25,6 +25,7 @@ controller.abort(new Error('Operation aborted'))
 Apache-2.0
 
 <!-- bare-refgen:api start -->
+
 ## API
 
 ### AbortController
@@ -43,9 +44,9 @@ Abort the controller's signal, notifying every listener with the given `reason`.
 
 **Parameters**
 
-| Parameter | Type | Default | Description |
-| --- | --- | --- | --- |
-| `reason` | `any` | — | The reason to abort with; passed to every `'abort'` listener and exposed as the signal's `reason`. Defaults to an `AbortError` when omitted. |
+| Parameter | Type  | Default | Description                                                                                                                                  |
+| --------- | ----- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `reason`  | `any` | —       | The reason to abort with; passed to every `'abort'` listener and exposed as the signal's `reason`. Defaults to an `AbortError` when omitted. |
 
 #### `signal: AbortSignal`
 
@@ -69,9 +70,9 @@ Return a new `AbortSignal` that is already aborted with the given `reason`.
 
 **Parameters**
 
-| Parameter | Type | Default | Description |
-| --- | --- | --- | --- |
-| `reason` | `any` | — | The reason the returned signal is aborted with. Defaults to an `AbortError` when omitted. |
+| Parameter | Type  | Default | Description                                                                               |
+| --------- | ----- | ------- | ----------------------------------------------------------------------------------------- |
+| `reason`  | `any` | —       | The reason the returned signal is aborted with. Defaults to an `AbortError` when omitted. |
 
 #### `AbortSignal.any(signals: AbortSignal[]): AbortSignal`
 
@@ -81,9 +82,9 @@ Return a new `AbortSignal` that aborts as soon as any of the given `signals` abo
 
 **Parameters**
 
-| Parameter | Type | Default | Description |
-| --- | --- | --- | --- |
-| `signals` | `AbortSignal[]` | — | The signals to observe; the returned signal aborts with the reason of whichever aborts first, or immediately if one is already aborted. |
+| Parameter | Type            | Default | Description                                                                                                                             |
+| --------- | --------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `signals` | `AbortSignal[]` | —       | The signals to observe; the returned signal aborts with the reason of whichever aborts first, or immediately if one is already aborted. |
 
 #### `AbortSignal.timeout(ms: number): AbortSignal`
 
@@ -93,9 +94,9 @@ Return a new `AbortSignal` that aborts with a `TimeoutError` after `ms` millisec
 
 **Parameters**
 
-| Parameter | Type | Default | Description |
-| --- | --- | --- | --- |
-| `ms` | `number` | — | The number of milliseconds to wait before the returned signal aborts with a `TimeoutError`. |
+| Parameter | Type     | Default | Description                                                                                 |
+| --------- | -------- | ------- | ------------------------------------------------------------------------------------------- |
+| `ms`      | `number` | —       | The number of milliseconds to wait before the returned signal aborts with a `TimeoutError`. |
 
 #### `reason: any`
 
@@ -134,4 +135,5 @@ type AbortSignalConstructor = typeof abort.AbortSignal
 ```
 
 [source](https://github.com/holepunchto/bare-abort-controller/blob/v1.1.2/global.d.ts#L4)
+
 <!-- bare-refgen:api end -->
