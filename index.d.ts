@@ -19,17 +19,21 @@ declare class AbortSignal {
 
   /**
    * Return a new `AbortSignal` that is already aborted with the given `reason`.
-   * @param reason - The reason the returned signal is aborted with. Defaults to an `AbortError` when omitted.
+   * @param reason - The reason the returned signal is aborted with. Defaults to an `AbortError`
+   * when omitted.
    */
   static abort(reason: any): AbortSignal
   /**
    * Return a new `AbortSignal` that aborts with a `TimeoutError` after `ms` milliseconds.
-   * @param ms - The number of milliseconds to wait before the returned signal aborts with a `TimeoutError`.
+   * @param ms - The number of milliseconds to wait before the returned signal aborts with a
+   * `TimeoutError`.
    */
   static timeout(ms: number): AbortSignal
   /**
-   * Return a new `AbortSignal` that aborts as soon as any of the given `signals` abort, with the same reason.
-   * @param signals - The signals to observe; the returned signal aborts with the reason of whichever aborts first, or immediately if one is already aborted.
+   * Return a new `AbortSignal` that aborts as soon as any of the given `signals` abort, with the
+   * same reason.
+   * @param signals - The signals to observe; the returned signal aborts with the reason of
+   * whichever aborts first, or immediately if one is already aborted.
    */
   static any(signals: AbortSignal[]): AbortSignal
 }
@@ -41,7 +45,8 @@ interface AbortController {
 
   /**
    * Abort the controller's signal, notifying every listener with the given `reason`.
-   * @param reason - The reason to abort with; passed to every `'abort'` listener and exposed as the signal's `reason`. Defaults to an `AbortError` when omitted.
+   * @param reason - The reason to abort with; passed to every `'abort'` listener and exposed as the
+   * signal's `reason`. Defaults to an `AbortError` when omitted.
    */
   abort(reason: any): void
 }
