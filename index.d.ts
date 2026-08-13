@@ -44,9 +44,11 @@ interface AbortController {
   readonly signal: AbortSignal
 
   /**
-   * Abort the controller's signal, notifying every listener with the given `reason`.
-   * @param reason - The reason to abort with; passed to every `'abort'` listener and exposed as the
-   * signal's `reason`. Defaults to an `AbortError` when omitted.
+   * Abort the controller's signal, dispatching an `'abort'` event to its listeners. Does nothing
+   * if the signal has already been aborted.
+   * @param reason - The reason to abort with; exposed as the signal's `reason` and thrown by
+   * `throwIfAborted()`. Listeners are passed a plain `Event` and must read `signal.reason`
+   * themselves. Defaults to an `AbortError` when omitted.
    */
   abort(reason: any): void
 }
