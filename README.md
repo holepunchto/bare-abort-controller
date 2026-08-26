@@ -20,6 +20,10 @@ signal.addEventListener('abort', (event) => {
 controller.abort(new Error('Operation aborted'))
 ```
 
+## API
+
+See the [`bare-abort-controller` reference](https://docs.pears.com/reference/bare/modules/bare-abort-controller).
+
 ## License
 
 Apache-2.0
