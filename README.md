@@ -22,9 +22,7 @@ controller.abort(new Error('Operation aborted'))
 
 ## API
 
-See the [`bare-abort-controller` reference][reference].
-
-[reference]: https://docs.pears.com/reference/bare/modules/bare-abort-controller
+See the [`bare-abort-controller` reference](https://docs.pears.com/reference/bare/modules/bare-abort-controller).
 
 ## License
 
